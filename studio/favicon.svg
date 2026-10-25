@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" width="32" height="32" role="img" aria-label="图表工作台">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#4b7bf6"/>
+      <stop offset="1" stop-color="#2f57cc"/>
+    </linearGradient>
+  </defs>
+  <rect width="32" height="32" rx="7" fill="url(#bg)"/>
+  <g fill="none" stroke="#ffffff" stroke-width="2.75" stroke-linecap="round">
+    <path d="M13 7.5v17"/>
+    <path d="M13 11.5h8"/>
+    <path d="M13 16h11"/>
+    <path d="M13 20.5h9"/>
+    <path d="M8 16h5"/>
+  </g>
+</svg>

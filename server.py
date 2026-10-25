@@ -295,6 +295,13 @@ class Handler(BaseHTTPRequestHandler):
             self.send_header("Content-Length", "0")
             self.end_headers()
             return
+        if rel == "favicon.ico":
+            # 浏览器默认会直接要 /favicon.ico（书签、无 link 标签的页面），别回 404
+            self.send_response(302)
+            self.send_header("Location", "/studio/favicon.ico")
+            self.send_header("Content-Length", "0")
+            self.end_headers()
+            return
         if rel in ("studio/",):
             target = STUDIO_STATIC / "index.html"      # 默认主页：统一图表工作台
         else:
