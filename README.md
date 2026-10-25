@@ -42,7 +42,7 @@
 │   ├── styles.css            4 套配色 + 深色模式 + 响应式断点
 │   ├── kinds.js              12 种图表的模板 + 布局算法 + 绘制 + 互转
 │   ├── app.js                编辑引擎：选中/拖拽/就地编辑/连线/撤销/导出/图片
-│   └── favicon.svg / png / ico   标签页与 Windows 标题栏图标
+│   └── favicon.svg / png / ico   标签页、Windows 标题栏、iOS 主屏图标
 ├── charts/                   图表数据 *.chart.json   ← 打开就能改的目录
 │   ├── 示例：*.chart.json     12 张示例（只读保护，可 ↺ 重置）
 │   ├── .history/             每次保存自动留快照（最多 30 份/图表，本地生成，不入库）
@@ -62,7 +62,7 @@
 │   ├── test_image.js         图片上传/保存/导出/移除
 │   ├── test_transparent.js   透明底导出
 │   ├── browser.js / .py      自动找 Edge/Chrome/Chromium（测试脚本共用）
-│   ├── make_favicon.py       生成标签页图标 favicon.png / .ico（改配色后重跑）
+│   ├── make_favicon.py       重生成图标：png 64 / 180（iOS）/ ico（16 用简化版）
 │   ├── check_dom.py          渲染断言 + 工具栏响应式检查
 │   ├── shot_studio.py        逐类型截图（无头浏览器）
 │   └── shot_layouts.js       5 种导图布局截图
@@ -160,6 +160,7 @@ node tools/test_dblclick.js 8712     # 真实鼠标双击（合成事件测不�
 node tools/test_render_diff.js 8712  # 增量渲染：DOM 是否被复用
 node tools/test_image.js 8712        # 图片：上传/渲染/保存/重开/导出/移除
 node tools/test_transparent.js 8712  # 透明底导出：文件与背景像素
+python tools/test_favicon.py 8712    # 图标：尺寸/16px 简化版/HTML 引用/HTTP 可访问（需 Pillow）
 node tools/shot_layouts.js 8712      # 导出 5 种布局截图到 tools/out/（人工看效果用）
 ```
 
