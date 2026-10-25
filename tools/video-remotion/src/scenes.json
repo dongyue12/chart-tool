@@ -1,0 +1,11 @@
+[
+  { "file": "01-cover.png",     "seconds": 4   },
+  { "file": "02-pain.png",      "seconds": 4.6 },
+  { "file": "03-ai-ask.png",    "seconds": 3.2 },
+  { "file": "04-ai-write.png",  "seconds": 4   },
+  { "file": "05-newchart.png",  "seconds": 4.4 },
+  { "file": "06-edit.png",      "seconds": 4   },
+  { "file": "07-collapse.png",  "seconds": 3.8 },
+  { "file": "08-export.png",    "seconds": 3.6 },
+  { "file": "09-end.png",       "seconds": 4.6 }
+]

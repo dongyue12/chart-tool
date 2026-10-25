@@ -41,3 +41,5 @@ Thumbs.db
 # 视频与录制中间产物
 docs/*.mp4
 tools/demo_frames/
+tools/video-remotion/node_modules/
+tools/video-remotion/public/
