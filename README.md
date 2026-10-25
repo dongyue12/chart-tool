@@ -69,6 +69,7 @@
 │   ├── browser.js / .py      自动找 Edge/Chrome/Chromium（测试脚本共用）
 │   ├── build_site.py         打包纯静态站点到 site/（发布用，不需要后端）
 │   ├── test_site.js          静态版验收：浏览器 + 本地存储，21 项
+│   ├── smoke_online.js       线上冒烟：真浏览器打开已发布链接，验「转换」可用，12 项
 │   ├── make_favicon.py       重生成图标：png 64 / 180（iOS）/ ico（16 用简化版）
 │   ├── check_dom.py          渲染断言 + 工具栏响应式检查
 │   ├── shot_studio.py        逐类型截图（无头浏览器）
@@ -195,6 +196,7 @@ node tools/test_render_diff.js 8712  # 增量渲染：DOM 是否被复用
 node tools/test_image.js 8712        # 图片：上传/渲染/保存/重开/导出/移除
 node tools/test_transparent.js 8712  # 透明底导出：文件与背景像素
 node tools/test_site.js 8899         # 静态版：自己起静态服务，验证没有后端也能用（21 项）
+node tools/smoke_online.js           # 线上冒烟：打开已发布链接真点一次「转换」（12 项，可传 URL 换目标）
 python tools/test_favicon.py 8712    # 图标：尺寸/16px 简化版/HTML 引用/HTTP 可访问（需 Pillow）
 node tools/shot_layouts.js 8712      # 导出 5 种布局截图到 tools/out/（人工看效果用）
 node tools/shot_compare.js 8712      # 同一份内容 → 导图/流程/时间线/甘特图 四张对照
