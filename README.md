@@ -43,6 +43,8 @@
 │   ├── kinds.js              12 种图表的模板 + 布局算法 + 绘制 + 互转
 │   ├── app.js                编辑引擎：选中/拖拽/就地编辑/连线/撤销/导出/图片
 │   └── favicon.svg / png / ico   标签页、Windows 标题栏、iOS 主屏图标
+├── web/
+│   └── api-shim.js           静态演示版的「假后端」：用 localStorage 顶替 /api/charts
 ├── charts/                   图表数据 *.chart.json   ← 打开就能改的目录
 │   ├── 示例：*.chart.json     12 张示例（只读保护，可 ↺ 重置）
 │   ├── .history/             每次保存自动留快照（最多 30 份/图表，本地生成，不入库）
@@ -62,6 +64,8 @@
 │   ├── test_image.js         图片上传/保存/导出/移除
 │   ├── test_transparent.js   透明底导出
 │   ├── browser.js / .py      自动找 Edge/Chrome/Chromium（测试脚本共用）
+│   ├── build_site.py         打包纯静态站点到 site/（发布用，不需要后端）
+│   ├── test_site.js          静态版验收：浏览器 + 本地存储，21 项
 │   ├── make_favicon.py       重生成图标：png 64 / 180（iOS）/ ico（16 用简化版）
 │   ├── check_dom.py          渲染断言 + 工具栏响应式检查
 │   ├── shot_studio.py        逐类型截图（无头浏览器）
@@ -96,6 +100,28 @@ python3 server.py --open        # macOS / Linux（Windows 用 python server.py -
 
 > 注意：`start.bat` 存的是 **GBK 编码**（cmd 默认代码页）。若要用编辑器改它，
 > 改完请保持 GBK / ANSI 编码保存，否则中文会变乱码。
+
+## 发布成在线版本（不需要服务器）
+
+本地版靠 `server.py` 读写 `charts/`。想把它挂到公网给别人点开就用，得先去掉这个后端依赖——
+一步打包搞定：
+
+```bash
+python tools/build_site.py        # 生成 site/（12 张示例 + 前端 + 适配层，约 220KB）
+python -m http.server 8899 --directory site    # 本地先看一眼
+```
+
+`web/api-shim.js` 会接管 `/api/charts` 的**所有**请求，用 localStorage 顶替服务端：
+列表、读取、新建、保存、删除、历史快照、恢复、示例重置，行为与 `server.py` 一致
+（示例不可删、改乱可一键重置、每次保存留快照）。前端 5 个文件**一行都没改**。
+
+`site/` 是纯静态目录，丢到任意静态托管都能跑，或者用 WorkBuddy 的「发布为网站」。
+
+> 取舍：演示版的数据存在**访问者自己的浏览器**里，换设备/换浏览器会回到初始示例。
+> 这是有意的——纯静态不会白屏，也不会因为后端配额把体验卡住。要真正跨设备同步，
+> 得接云数据库（见 `docs/1024-投稿作品介绍.md` 里的方案对比）。
+
+> 打包只带 `charts/示例：*.chart.json`，你自己画的图不会被打进去。
 
 ## 工作台操作
 
@@ -140,7 +166,8 @@ python3 server.py --open        # macOS / Linux（Windows 用 python server.py -
 ## 测试
 
 先起服务（`python3 server.py`），再另开一个终端跑。带端口参数的脚本都在**临时图表**上操作、
-跑完自动清理，不会碰你自己的数据。
+跑完自动清理，不会碰你自己的数据。`tools/test_site.js` 例外：它自己起静态服务器，
+验的是 `site/` 那份打包产物，不需要先跑 `server.py`（但要先 `build_site.py`）。
 
 需要 **Node 18+**（用到全局 `fetch`）和一个 Chromium 内核浏览器（Edge / Chrome / Chromium 都认，
 `tools/browser.js` 会自动找；找不到就设 `CHART_TOOL_BROWSER=/path/to/chrome`）。
@@ -160,6 +187,7 @@ node tools/test_dblclick.js 8712     # 真实鼠标双击（合成事件测不�
 node tools/test_render_diff.js 8712  # 增量渲染：DOM 是否被复用
 node tools/test_image.js 8712        # 图片：上传/渲染/保存/重开/导出/移除
 node tools/test_transparent.js 8712  # 透明底导出：文件与背景像素
+node tools/test_site.js 8899         # 静态版：自己起静态服务，验证没有后端也能用（21 项）
 python tools/test_favicon.py 8712    # 图标：尺寸/16px 简化版/HTML 引用/HTTP 可访问（需 Pillow）
 node tools/shot_layouts.js 8712      # 导出 5 种布局截图到 tools/out/（人工看效果用）
 ```
@@ -252,6 +280,7 @@ curl -X POST http://127.0.0.1:8712/api/charts/产品规划/restore \
 | `charts/` 里你自己画的图 | 那是你的内容；仓库只带 12 张只读示例 |
 | `charts/.history/`、`charts/.samples/` | 运行时自动生成的快照与底稿，体积大且人人不同 |
 | `tools/out/`、`.shots/` | 测试与截图产物 |
+| `site/` | 静态演示版的构建产物，`python tools/build_site.py` 随时重新生成 |
 | `__pycache__/` | Python 缓存 |
 | `archive/`、`.workbuddy/memory/` | 旧版存档与本机记忆 |
 

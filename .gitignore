@@ -7,6 +7,12 @@ node_modules/
 tools/out/
 .shots/
 
+# 静态演示版构建产物（python tools/build_site.py 生成，需要时现生成）
+site/
+
+# 参赛投稿策略稿：只留本地，不对外公开
+docs/1024-投稿作品介绍.md
+
 # —— 你画的数据 ——
 # 仓库只带 12 张示例；自己画的图、历史快照、示例底稿都不入库
 charts/*
