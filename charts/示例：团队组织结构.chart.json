@@ -1,0 +1,79 @@
+{
+  "nodes": [
+    {
+      "id": "nqmns26fwm",
+      "text": "张伟",
+      "role": "CEO",
+      "parent": null,
+      "note": "",
+      "w": 128,
+      "h": 59,
+      "x": -64,
+      "y": 0
+    },
+    {
+      "id": "nqmns275ox",
+      "text": "李娜",
+      "role": "技术总监",
+      "parent": "nqmns26fwm",
+      "note": "",
+      "w": 128,
+      "h": 59,
+      "x": -141,
+      "y": 121
+    },
+    {
+      "id": "nqmns28n82",
+      "text": "王强",
+      "role": "市场总监",
+      "parent": "nqmns26fwm",
+      "note": "",
+      "w": 128,
+      "h": 59,
+      "x": 90,
+      "y": 121
+    },
+    {
+      "id": "nqmns29hry",
+      "text": "前端组",
+      "role": "组长",
+      "parent": "nqmns275ox",
+      "note": "",
+      "w": 128,
+      "h": 59,
+      "x": -218,
+      "y": 242
+    },
+    {
+      "id": "nqmns2a181",
+      "text": "后端组",
+      "role": "组长",
+      "parent": "nqmns275ox",
+      "note": "",
+      "w": 128,
+      "h": 59,
+      "x": -64,
+      "y": 242
+    },
+    {
+      "id": "nqmns2bzhr",
+      "text": "品牌组",
+      "role": "组长",
+      "parent": "nqmns28n82",
+      "note": "",
+      "w": 128,
+      "h": 59,
+      "x": 90,
+      "y": 242
+    }
+  ],
+  "links": [],
+  "meta": {
+    "example": true
+  },
+  "title": "示例：团队组织结构",
+  "type": "org",
+  "id": "示例：团队组织结构",
+  "schema": "workbuddy-chart/v1",
+  "updatedAt": "2026-10-25T10:47:10+08:00"
+}

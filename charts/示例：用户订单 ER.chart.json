@@ -1,0 +1,87 @@
+{
+  "nodes": [
+    {
+      "id": "nqmmn1ll2c",
+      "text": "用户",
+      "kind": "entity",
+      "attrs": [
+        {
+          "text": "id",
+          "pk": true
+        },
+        {
+          "text": "name",
+          "pk": false
+        },
+        {
+          "text": "phone",
+          "pk": false
+        }
+      ],
+      "note": "",
+      "w": 118,
+      "h": 97,
+      "x": -59,
+      "y": 0
+    },
+    {
+      "id": "nqmmn1njrw",
+      "text": "下单",
+      "kind": "relation",
+      "attrs": [],
+      "note": "",
+      "w": 90,
+      "h": 74,
+      "x": -45,
+      "y": 163
+    },
+    {
+      "id": "nqmmn1mmse",
+      "text": "订单",
+      "kind": "entity",
+      "attrs": [
+        {
+          "text": "id",
+          "pk": true
+        },
+        {
+          "text": "amount",
+          "pk": false
+        },
+        {
+          "text": "created_at",
+          "pk": false
+        }
+      ],
+      "note": "",
+      "w": 118,
+      "h": 97,
+      "x": -59,
+      "y": 303
+    }
+  ],
+  "links": [
+    {
+      "id": "lqmmn1ory8",
+      "from": "nqmmn1ll2c",
+      "to": "nqmmn1njrw",
+      "label": "1",
+      "kind": "er"
+    },
+    {
+      "id": "lqmmn1psjr",
+      "from": "nqmmn1njrw",
+      "to": "nqmmn1mmse",
+      "label": "N",
+      "kind": "er"
+    }
+  ],
+  "meta": {
+    "example": true
+  },
+  "title": "示例：用户订单 ER",
+  "type": "er",
+  "id": "示例：用户订单 ER",
+  "schema": "workbuddy-chart/v1",
+  "updatedAt": "2026-10-25T10:47:10+08:00"
+}

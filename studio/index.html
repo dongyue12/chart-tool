@@ -1,0 +1,128 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>图表工作台 · WorkBuddy</title>
+<link rel="stylesheet" href="/studio/styles.css">
+</head>
+<body>
+
+<header class="topbar">
+  <button class="icon-btn side-toggle" id="btnSideToggle" title="图表列表">☰</button>
+  <div class="brand">
+    <svg viewBox="0 0 24 24" class="brand-ico"><path d="M4 6h6M4 12h5M4 18h7M14 6v12M14 12h6M14 8l5 0M14 16l5 0" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
+    <span>图表工作台</span>
+  </div>
+
+  <div class="doc-head">
+    <input id="titleInput" class="title-input" placeholder="未命名图表" spellcheck="false">
+    <span id="typeBadge" class="badge">—</span>
+    <span id="saveState" class="save-state">已保存</span>
+  </div>
+
+  <div class="toolbar" id="toolbar"></div>
+</header>
+
+<main class="layout">
+  <aside class="side" id="side">
+    <div class="side-head">
+      <input id="searchInput" class="search" placeholder="搜索图表…" spellcheck="false">
+      <button class="icon-btn" id="btnNewSmall" title="新建图表">＋</button>
+    </div>
+    <div class="side-list" id="chartList"></div>
+    <div class="side-foot">
+      <button class="ghost-btn" id="btnImportMd">导入 Markdown</button>
+    </div>
+  </aside>
+
+  <section class="canvas" id="canvas">
+    <svg id="stage" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <marker id="ar" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse">
+          <path d="M0,0 L10,5 L0,10 z" class="ar-fill"/>
+        </marker>
+      </defs>
+      <g id="viewport">
+        <g id="layerBack"></g>
+        <g id="layerLink"></g>
+        <g id="layerNode"></g>
+        <g id="layerTmp"></g>
+      </g>
+    </svg>
+
+    <div class="empty" id="emptyState">
+      <div class="empty-ico">✦</div>
+      <h2>还没有图表</h2>
+      <p>点左上角「新建」，从 12 种图表里挑一个开始</p>
+      <button class="primary-btn" id="btnEmptyNew">新建图表</button>
+    </div>
+
+    <div class="zoombar">
+      <button class="icon-btn" id="btnZoomOut" title="缩小">－</button>
+      <span id="zoomLabel">100%</span>
+      <button class="icon-btn" id="btnZoomIn" title="放大">＋</button>
+      <button class="icon-btn" id="btnFit" title="适应画布">⤢</button>
+    </div>
+
+    <div class="hint" id="hintBar"></div>
+  </section>
+
+  <aside class="inspector" id="inspector">
+    <div class="insp-head">
+      <span id="inspTitle">属性</span>
+      <button class="icon-btn" id="btnInspClose" title="收起">›</button>
+    </div>
+    <div class="insp-body" id="inspBody"></div>
+  </aside>
+</main>
+
+<!-- 新建图表：类型选择 -->
+<div class="modal" id="newModal" hidden>
+  <div class="modal-mask" data-close="1"></div>
+  <div class="modal-panel">
+    <div class="modal-head">
+      <h3>新建图表</h3>
+      <input id="newTitle" class="modal-input" placeholder="图表名称" spellcheck="false">
+      <button class="icon-btn" data-close="1">✕</button>
+    </div>
+    <div class="kind-grid" id="kindGrid"></div>
+    <div class="modal-foot">
+      <span class="tip">也可以先导入 Markdown 大纲，再一键转换成任意图表类型</span>
+    </div>
+  </div>
+</div>
+
+<!-- 历史版本 -->
+<div class="drawer" id="historyDrawer" hidden>
+  <div class="drawer-head">
+    <h3>历史版本</h3>
+    <button class="icon-btn" data-close="1">✕</button>
+  </div>
+  <div class="drawer-body" id="historyBody"></div>
+</div>
+
+<!-- 通用菜单 -->
+<div class="menu" id="menu" hidden></div>
+
+<!-- 文本导入/导出 -->
+<div class="modal" id="textModal" hidden>
+  <div class="modal-mask" data-close="1"></div>
+  <div class="modal-panel">
+    <div class="modal-head">
+      <h3 id="textModalTitle">导入</h3>
+      <button class="icon-btn" data-close="1">✕</button>
+    </div>
+    <textarea id="textArea" class="modal-text" spellcheck="false"></textarea>
+    <div class="modal-foot" id="textModalFoot"></div>
+  </div>
+</div>
+
+<div class="toast" id="toast" hidden></div>
+<textarea id="editBox" class="edit-box" hidden spellcheck="false"></textarea>
+<input type="file" id="imgFile" accept="image/*" hidden>
+
+<script src="/studio/kinds.js"></script>
+<script src="/studio/app.js"></script>
+</body>
+</html>

@@ -1,0 +1,29 @@
+# —— 本地运行产物 ——
+__pycache__/
+*.pyc
+node_modules/
+
+# 测试 / 截图输出
+tools/out/
+.shots/
+
+# —— 你画的数据 ——
+# 仓库只带 12 张示例；自己画的图、历史快照、示例底稿都不入库
+charts/*
+!charts/示例：*.chart.json
+!charts/.seed.json
+charts/.history/
+charts/.samples/
+
+# —— 旧版存档（本地留着看，不进仓库）——
+archive/
+
+# —— 个人环境：技能保留，WorkBuddy 记忆不提交 ——
+.workbuddy/memory/
+
+# —— 编辑器 / 系统 ——
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/
+*.swp

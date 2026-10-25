@@ -1,0 +1,155 @@
+{
+  "nodes": [
+    {
+      "id": "nqmkmkge6",
+      "text": "Web / App 客户端",
+      "tier": 0,
+      "kind": "client",
+      "note": "",
+      "x": -79,
+      "y": 12,
+      "w": 158,
+      "h": 52
+    },
+    {
+      "id": "nqmkmljsq",
+      "text": "API 网关",
+      "tier": 1,
+      "kind": "service",
+      "note": "",
+      "x": -79,
+      "y": 150,
+      "w": 158,
+      "h": 52
+    },
+    {
+      "id": "nqmkmmh2a",
+      "text": "鉴权服务",
+      "tier": 2,
+      "kind": "service",
+      "note": "",
+      "x": -175,
+      "y": 288,
+      "w": 158,
+      "h": 52
+    },
+    {
+      "id": "nqmkmneba",
+      "text": "业务服务",
+      "tier": 2,
+      "kind": "module",
+      "note": "",
+      "x": 17,
+      "y": 288,
+      "w": 158,
+      "h": 52
+    },
+    {
+      "id": "nqmkmofj7",
+      "text": "数据库",
+      "tier": 3,
+      "kind": "data",
+      "note": "",
+      "x": -175,
+      "y": 426,
+      "w": 158,
+      "h": 52
+    },
+    {
+      "id": "nqmkmpx0s",
+      "text": "对象存储",
+      "tier": 3,
+      "kind": "data",
+      "note": "",
+      "x": 17,
+      "y": 426,
+      "w": 158,
+      "h": 52
+    }
+  ],
+  "links": [
+    {
+      "id": "lqmkmqda6",
+      "from": "nqmkmkge6",
+      "to": "nqmkmljsq",
+      "label": "HTTPS",
+      "kind": "arch"
+    },
+    {
+      "id": "lqmkmr6vm",
+      "from": "nqmkmljsq",
+      "to": "nqmkmmh2a",
+      "label": "",
+      "kind": "arch"
+    },
+    {
+      "id": "lqmkmsi8y",
+      "from": "nqmkmljsq",
+      "to": "nqmkmneba",
+      "label": "",
+      "kind": "arch"
+    },
+    {
+      "id": "lqmkmtj5l",
+      "from": "nqmkmneba",
+      "to": "nqmkmofj7",
+      "label": "",
+      "kind": "arch"
+    },
+    {
+      "id": "lqmkmu2vi",
+      "from": "nqmkmneba",
+      "to": "nqmkmpx0s",
+      "label": "",
+      "kind": "arch"
+    }
+  ],
+  "meta": {
+    "tiers": [
+      "接入层",
+      "网关层",
+      "服务层",
+      "数据层"
+    ],
+    "example": true
+  },
+  "_tierBoxes": [
+    {
+      "tier": 0,
+      "name": "接入层",
+      "x": -105,
+      "y": -14,
+      "w": 210,
+      "h": 92
+    },
+    {
+      "tier": 1,
+      "name": "网关层",
+      "x": -105,
+      "y": 124,
+      "w": 210,
+      "h": 92
+    },
+    {
+      "tier": 2,
+      "name": "服务层",
+      "x": -201,
+      "y": 262,
+      "w": 402,
+      "h": 92
+    },
+    {
+      "tier": 3,
+      "name": "数据层",
+      "x": -201,
+      "y": 400,
+      "w": 402,
+      "h": 92
+    }
+  ],
+  "title": "示例：系统架构分层",
+  "type": "arch",
+  "id": "示例：系统架构分层",
+  "schema": "workbuddy-chart/v1",
+  "updatedAt": "2026-10-25T10:47:10+08:00"
+}

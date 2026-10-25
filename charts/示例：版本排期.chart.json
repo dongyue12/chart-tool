@@ -1,0 +1,98 @@
+{
+  "nodes": [
+    {
+      "id": "nqmo52cxes",
+      "text": "需求梳理",
+      "start": "2026-10-01",
+      "days": 5,
+      "progress": 100,
+      "owner": "",
+      "note": "",
+      "w": 220,
+      "h": 34,
+      "x": -236,
+      "y": 46,
+      "_barX": 236,
+      "_barW": 130
+    },
+    {
+      "id": "nqmo52djvm",
+      "text": "方案设计",
+      "start": "2026-10-06",
+      "days": 4,
+      "progress": 80,
+      "owner": "",
+      "note": "",
+      "w": 220,
+      "h": 34,
+      "x": -236,
+      "y": 90,
+      "_barX": 366,
+      "_barW": 104
+    },
+    {
+      "id": "nqmo52e73b",
+      "text": "开发实现",
+      "start": "2026-10-10",
+      "days": 10,
+      "progress": 35,
+      "owner": "",
+      "note": "",
+      "w": 220,
+      "h": 34,
+      "x": -236,
+      "y": 134,
+      "_barX": 470,
+      "_barW": 260
+    },
+    {
+      "id": "nqmo52f1jc",
+      "text": "联调测试",
+      "start": "2026-10-20",
+      "days": 5,
+      "progress": 0,
+      "owner": "",
+      "note": "",
+      "w": 220,
+      "h": 34,
+      "x": -236,
+      "y": 178,
+      "_barX": 730,
+      "_barW": 130
+    },
+    {
+      "id": "nqmo52ga2n",
+      "text": "发布上线",
+      "start": "2026-10-25",
+      "days": 2,
+      "progress": 0,
+      "owner": "",
+      "note": "",
+      "w": 220,
+      "h": 34,
+      "x": -236,
+      "y": 222,
+      "_barX": 860,
+      "_barW": 52
+    }
+  ],
+  "links": [],
+  "meta": {
+    "start": "2026-10-01",
+    "end": "2026-10-31",
+    "example": true
+  },
+  "_gantt": {
+    "start": "2026-10-01",
+    "end": "2026-10-31",
+    "total": 31,
+    "day": 26,
+    "w": 806,
+    "h": 266
+  },
+  "title": "示例：版本排期",
+  "type": "gantt",
+  "id": "示例：版本排期",
+  "schema": "workbuddy-chart/v1",
+  "updatedAt": "2026-10-25T10:47:10+08:00"
+}

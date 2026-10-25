@@ -1,0 +1,71 @@
+{
+  "nodes": [
+    {
+      "id": "nqmoi2hk95",
+      "text": "核心概念",
+      "note": "",
+      "x": 0,
+      "y": 0,
+      "w": 120,
+      "h": 42
+    },
+    {
+      "id": "nqmoi2iwcc",
+      "text": "特征 A",
+      "note": "",
+      "x": 210,
+      "y": 0,
+      "w": 120,
+      "h": 42
+    },
+    {
+      "id": "nqmoi2jh0n",
+      "text": "特征 B",
+      "note": "",
+      "x": 420,
+      "y": 0,
+      "w": 120,
+      "h": 42
+    },
+    {
+      "id": "nqmoi2k3cs",
+      "text": "应用场景",
+      "note": "",
+      "x": 40,
+      "y": 120,
+      "w": 120,
+      "h": 42
+    }
+  ],
+  "links": [
+    {
+      "id": "lqmoi2livs",
+      "from": "nqmoi2hk95",
+      "to": "nqmoi2iwcc",
+      "label": "包含",
+      "kind": "rel"
+    },
+    {
+      "id": "lqmoi2mmof",
+      "from": "nqmoi2hk95",
+      "to": "nqmoi2jh0n",
+      "label": "包含",
+      "kind": "rel"
+    },
+    {
+      "id": "lqmoi2ni53",
+      "from": "nqmoi2hk95",
+      "to": "nqmoi2k3cs",
+      "label": "应用于",
+      "kind": "rel"
+    }
+  ],
+  "meta": {
+    "example": true
+  },
+  "title": "示例：概念关系",
+  "type": "concept",
+  "id": "示例：概念关系",
+  "schema": "workbuddy-chart/v1",
+  "updatedAt": "2026-10-25T10:47:10+08:00"
+}

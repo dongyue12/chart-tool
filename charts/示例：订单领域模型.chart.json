@@ -1,0 +1,115 @@
+{
+  "nodes": [
+    {
+      "id": "nqmm71e3lr",
+      "text": "User",
+      "kind": "class",
+      "members": [
+        {
+          "text": "id: Long",
+          "kind": "attr"
+        },
+        {
+          "text": "name: String",
+          "kind": "attr"
+        },
+        {
+          "text": "login()",
+          "kind": "method"
+        }
+      ],
+      "note": "",
+      "w": 120,
+      "h": 103,
+      "x": -60,
+      "y": 0
+    },
+    {
+      "id": "nqmm71fg01",
+      "text": "Order",
+      "kind": "class",
+      "members": [
+        {
+          "text": "id: Long",
+          "kind": "attr"
+        },
+        {
+          "text": "amount: Decimal",
+          "kind": "attr"
+        },
+        {
+          "text": "pay()",
+          "kind": "method"
+        }
+      ],
+      "note": "",
+      "w": 125,
+      "h": 103,
+      "x": -62,
+      "y": 165
+    },
+    {
+      "id": "nqmm71gjqj",
+      "text": "Payment",
+      "kind": "class",
+      "members": [
+        {
+          "text": "pay(amount)",
+          "kind": "method"
+        }
+      ],
+      "note": "",
+      "w": 120,
+      "h": 65,
+      "x": -60,
+      "y": 330
+    },
+    {
+      "id": "nqmm71hwhw",
+      "text": "Payable",
+      "kind": "interface",
+      "members": [
+        {
+          "text": "pay(amount)",
+          "kind": "method"
+        }
+      ],
+      "note": "",
+      "w": 154,
+      "h": 65,
+      "x": -77,
+      "y": 457
+    }
+  ],
+  "links": [
+    {
+      "id": "lqmm71i1om",
+      "from": "nqmm71e3lr",
+      "to": "nqmm71fg01",
+      "label": "1..*",
+      "kind": "assoc"
+    },
+    {
+      "id": "lqmm71jj6a",
+      "from": "nqmm71fg01",
+      "to": "nqmm71gjqj",
+      "label": "1",
+      "kind": "compose"
+    },
+    {
+      "id": "lqmm71kg81",
+      "from": "nqmm71gjqj",
+      "to": "nqmm71hwhw",
+      "label": "",
+      "kind": "impl"
+    }
+  ],
+  "meta": {
+    "example": true
+  },
+  "title": "示例：订单领域模型",
+  "type": "class",
+  "id": "示例：订单领域模型",
+  "schema": "workbuddy-chart/v1",
+  "updatedAt": "2026-10-25T10:47:10+08:00"
+}

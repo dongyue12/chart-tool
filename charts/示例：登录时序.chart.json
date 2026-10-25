@@ -1,0 +1,112 @@
+{
+  "nodes": [
+    {
+      "id": "nqml9vzqb",
+      "text": "用户",
+      "kind": "actor",
+      "note": "",
+      "w": 120,
+      "h": 42,
+      "x": 0,
+      "y": 30,
+      "_life": 426
+    },
+    {
+      "id": "nqml9ws9t",
+      "text": "前端",
+      "kind": "actor",
+      "note": "",
+      "w": 120,
+      "h": 42,
+      "x": 172,
+      "y": 30,
+      "_life": 426
+    },
+    {
+      "id": "nqml9xewn",
+      "text": "服务端",
+      "kind": "actor",
+      "note": "",
+      "w": 120,
+      "h": 42,
+      "x": 344,
+      "y": 30,
+      "_life": 426
+    },
+    {
+      "id": "nqml9y9mj",
+      "text": "数据库",
+      "kind": "actor",
+      "note": "",
+      "w": 120,
+      "h": 42,
+      "x": 516,
+      "y": 30,
+      "_life": 426
+    }
+  ],
+  "links": [
+    {
+      "id": "lqml9ztyx",
+      "from": "nqml9vzqb",
+      "to": "nqml9ws9t",
+      "label": "点击登录",
+      "kind": "sync",
+      "_y": 126
+    },
+    {
+      "id": "lqml91032i",
+      "from": "nqml9ws9t",
+      "to": "nqml9xewn",
+      "label": "POST /login",
+      "kind": "sync",
+      "_y": 172
+    },
+    {
+      "id": "lqml911f8b",
+      "from": "nqml9xewn",
+      "to": "nqml9y9mj",
+      "label": "查询用户",
+      "kind": "sync",
+      "_y": 218
+    },
+    {
+      "id": "lqml91291x",
+      "from": "nqml9y9mj",
+      "to": "nqml9xewn",
+      "label": "返回记录",
+      "kind": "reply",
+      "_y": 264
+    },
+    {
+      "id": "lqml91341j",
+      "from": "nqml9xewn",
+      "to": "nqml9ws9t",
+      "label": "返回 token",
+      "kind": "reply",
+      "_y": 310
+    },
+    {
+      "id": "lqml914rv9",
+      "from": "nqml9ws9t",
+      "to": "nqml9vzqb",
+      "label": "登录成功",
+      "kind": "reply",
+      "_y": 356
+    }
+  ],
+  "meta": {
+    "example": true
+  },
+  "_seqBox": {
+    "x": -60,
+    "y": 0,
+    "w": 728,
+    "h": 456
+  },
+  "title": "示例：登录时序",
+  "type": "sequence",
+  "id": "示例：登录时序",
+  "schema": "workbuddy-chart/v1",
+  "updatedAt": "2026-10-25T10:47:10+08:00"
+}

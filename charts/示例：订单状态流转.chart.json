@@ -1,0 +1,91 @@
+{
+  "nodes": [
+    {
+      "id": "nqmlu15kse",
+      "text": "开始",
+      "kind": "start",
+      "note": "",
+      "w": 32,
+      "h": 32,
+      "x": -16,
+      "y": 0
+    },
+    {
+      "id": "nqmlu161di",
+      "text": "待支付",
+      "kind": "state",
+      "note": "",
+      "w": 122,
+      "h": 42,
+      "x": -61,
+      "y": 90
+    },
+    {
+      "id": "nqmlu17e3c",
+      "text": "已支付",
+      "kind": "state",
+      "note": "",
+      "w": 122,
+      "h": 42,
+      "x": -101,
+      "y": 190
+    },
+    {
+      "id": "nqmlu18xvj",
+      "text": "已完成",
+      "kind": "state",
+      "note": "",
+      "w": 122,
+      "h": 42,
+      "x": -61,
+      "y": 290
+    },
+    {
+      "id": "nqmlu19lu3",
+      "text": "结束",
+      "kind": "end",
+      "note": "",
+      "w": 32,
+      "h": 32,
+      "x": 69,
+      "y": 195
+    }
+  ],
+  "links": [
+    {
+      "id": "lqmlu1acyb",
+      "from": "nqmlu15kse",
+      "to": "nqmlu161di",
+      "kind": "trans"
+    },
+    {
+      "id": "lqmlu1be88",
+      "from": "nqmlu161di",
+      "to": "nqmlu17e3c",
+      "label": "支付成功",
+      "kind": "trans"
+    },
+    {
+      "id": "lqmlu1cl4k",
+      "from": "nqmlu17e3c",
+      "to": "nqmlu18xvj",
+      "label": "发货",
+      "kind": "trans"
+    },
+    {
+      "id": "lqmlu1dxpo",
+      "from": "nqmlu161di",
+      "to": "nqmlu19lu3",
+      "label": "超时取消",
+      "kind": "trans"
+    }
+  ],
+  "meta": {
+    "example": true
+  },
+  "title": "示例：订单状态流转",
+  "type": "state",
+  "id": "示例：订单状态流转",
+  "schema": "workbuddy-chart/v1",
+  "updatedAt": "2026-10-25T10:47:10+08:00"
+}
