@@ -1,10 +1,12 @@
-# 图表工作台（WorkBuddy 协作版）
+# 图表工作台（Chart Studio）
 
 一个本地运行的**多类型图表工具**：**12 种图表装进同一个页面**，左侧选文件、中间画布、右侧属性，
 新建时挑类型即可，画图过程中**不需要在页面之间来回切换**。
 
-最大的特点仍然是**数据就是文件**：所有图表都是 `charts/*.chart.json`，WorkBuddy 可以直接读写、
+最大的特点仍然是**数据就是文件**：所有图表都是 `charts/*.chart.json`，AI 助手可以直接读写、
 批量生成、二次加工，你在浏览器里的改动也能立刻被读到。
+
+![界面预览](docs/preview.png)
 
 ## 12 种图表，一个工作台
 
@@ -62,6 +64,7 @@
 │   ├── check_dom.py          渲染断言 + 工具栏响应式检查
 │   ├── shot_studio.py        逐类型截图（无头浏览器）
 │   └── shot_layouts.js       5 种导图布局截图
+├── docs/                     界面设计方案 + 上面那张预览图
 ├── .workbuddy/skills/mindmap/SKILL.md   让 AI 助手会用本工具的技能说明
 ├── .gitignore                图表数据 / 截图 / 缓存都不进仓库
 └── LICENSE                   MIT
@@ -158,14 +161,15 @@ node tools/test_transparent.js 8712  # 透明底导出：文件与背景像素
 node tools/shot_layouts.js 8712      # 导出 5 种布局截图到 tools/out/（人工看效果用）
 ```
 
-## 与 WorkBuddy 协作
+## 与 AI 助手协作
 
+这个工具是在 WorkBuddy 里长出来的，但**任何能读写本地文件的助手**（Claude Code、Cursor、ChatGPT 桌面版……）都一样能用：
 数据就是文件，所以最省事的方式是直接说：
 
 > 帮我把「新产品上线」整理成思维导图 / 把这段流程画成流程图
 
-WorkBuddy 会把结果写成 `charts/<标题>.chart.json`（坐标可以完全省略——打开时自动布局），
-刷新页面即可看到。写文件也可以先落盘再校验：
+助手把结果写成 `charts/<标题>.chart.json`（坐标可以完全省略——打开时自动布局），
+刷新页面即可看到。写完可以顺手校验一句：
 
 ```bash
 curl http://127.0.0.1:8712/api/charts        # 确认已收录
