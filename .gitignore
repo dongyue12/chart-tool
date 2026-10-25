@@ -37,3 +37,7 @@ Thumbs.db
 .idea/
 .vscode/
 *.swp
+
+# 视频与录制中间产物
+docs/*.mp4
+tools/demo_frames/

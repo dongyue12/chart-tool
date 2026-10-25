@@ -901,7 +901,6 @@
     { id: 'layout', label: '布局', icon: 'layout', fit: 2, act: (btn) => layoutMenu(btn) },
     { id: 'fit', label: '适应', icon: 'fit', fit: 3, act: fitView },
     { id: 'export', label: '导出', icon: 'export', fit: 1, act: (btn) => exportMenu(btn) },
-    { id: 'convert', label: '转换', icon: 'convert', fit: 2, act: (btn) => convertMenu(btn) },
     { id: 'history', label: '历史', icon: 'history', fit: 3, act: openHistory },
     { id: 'theme', label: '主题', icon: 'theme', fit: 2, act: (btn) => themeMenu(btn) },
     { id: 'more', label: '', icon: 'more', fit: 0, act: (btn) => moreMenu(btn) },
@@ -982,15 +981,6 @@
     ];
     if (kd && kd.mermaid) items.push({ label: 'Mermaid 代码', act: () => exportMermaid() });
     items.push({ sep: true }, { label: '导入 JSON', act: () => importJson() }, { label: '导入 Markdown', act: () => importMd() });
-    showMenu(btn, items);
-  }
-
-  function convertMenu(btn) {
-    const items = [{ title: '转换成其它图表（新建一份）' }];
-    K.__list().forEach((x) => {
-      if (x.type === S.doc.type) return;
-      items.push({ label: x.name, act: () => doConvert(x.type) });
-    });
     showMenu(btn, items);
   }
 
@@ -1118,18 +1108,6 @@
       rd.readAsText(f);
     };
     inp.click();
-  }
-
-  async function doConvert(type) {
-    const kd = kindDef(); if (!kd) return;
-    const items = outlineOf();
-    const t = K[type];
-    const r = t.fromOutline(items, S.doc.title);
-    const title = S.doc.title + '（' + t.name + '）';
-    const res = await api('POST', '/api/charts', { title, type, doc: { nodes: r.nodes || [], links: r.links || [], meta: r.meta || {}, theme: S.theme } });
-    await loadList();
-    await openDoc(res.id);
-    toast('已转换为' + t.name);
   }
 
   function svgMarkup(opt) {
