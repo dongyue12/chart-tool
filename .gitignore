@@ -27,6 +27,10 @@ archive/
 # —— 个人环境：技能保留，WorkBuddy 记忆不提交 ——
 .workbuddy/memory/
 
+# —— 发布记录（含本机路径与 appId，只留本地）——
+.wbapp_*.genie
+.workbuddy/applications.yaml
+
 # —— 编辑器 / 系统 ——
 .DS_Store
 Thumbs.db
