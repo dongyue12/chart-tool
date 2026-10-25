@@ -72,7 +72,8 @@
 │   ├── make_favicon.py       重生成图标：png 64 / 180（iOS）/ ico（16 用简化版）
 │   ├── check_dom.py          渲染断言 + 工具栏响应式检查
 │   ├── shot_studio.py        逐类型截图（无头浏览器）
-│   └── shot_layouts.js       5 种导图布局截图
+│   ├── shot_layouts.js       5 种导图布局截图
+│   └── shot_compare.js       对照图：同一内容 → 四种画法 / 五种排布
 ├── docs/                     界面设计方案 + 上面那张预览图
 ├── .workbuddy/skills/mindmap/SKILL.md   让 AI 助手会用本工具的技能说明
 ├── .gitignore                图表数据 / 截图 / 缓存都不进仓库
@@ -196,6 +197,8 @@ node tools/test_transparent.js 8712  # 透明底导出：文件与背景像素
 node tools/test_site.js 8899         # 静态版：自己起静态服务，验证没有后端也能用（21 项）
 python tools/test_favicon.py 8712    # 图标：尺寸/16px 简化版/HTML 引用/HTTP 可访问（需 Pillow）
 node tools/shot_layouts.js 8712      # 导出 5 种布局截图到 tools/out/（人工看效果用）
+node tools/shot_compare.js 8712      # 同一份内容 → 导图/流程/时间线/甘特图 四张对照
+node tools/shot_compare.js 8712 layouts   # 同一份导图 → 5 种排布
 ```
 
 ## 与 AI 助手协作

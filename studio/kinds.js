@@ -663,18 +663,21 @@
       return out;
     },
     fromOutline(items) {
+      // 按层级栈重建父子关系：大纲里的 level 就是「谁属于谁」，
+      // 只连 parent→child。同层兄弟之间不再互连（那样会横穿一大片），
+      // 顶层（level 0）之间才按顺序串起来，保证线性流程不散。
       const nodes = [], links = [];
-      let prev = null, prevLv = -1;
+      const stack = [];
+      let lastRoot = null;
       items.forEach((it) => {
         const lv = Math.max(0, Math.min(it.level, 8));
         const n = { id: uid('n'), text: it.text, shape: guessShape(it.text), note: '', x: null, y: null };
         nodes.push(n);
-        if (prev && lv > prevLv) links.push({ id: uid('l'), from: prev.id, to: n.id, label: '', kind: 'flow' });
-        else if (prev && lv === prevLv) {
-          const p = nodes.filter((x) => x !== n).slice(-2, -1)[0];
-          if (p) links.push({ id: uid('l'), from: p.id, to: n.id, label: '', kind: 'flow' });
-        }
-        prev = n; prevLv = lv;
+        if (stack.length > lv) stack.length = lv;
+        const parent = lv > 0 ? stack[lv - 1] : lastRoot;
+        if (parent) links.push({ id: uid('l'), from: parent.id, to: n.id, label: '', kind: 'flow' });
+        if (lv === 0) lastRoot = n;
+        stack[lv] = n;
       });
       return { nodes, links, meta: {} };
     },
@@ -1373,10 +1376,19 @@
         .map((n) => ({ level: 0, text: `${n.date || ''} ${n.text}`, note: n.note }));
     },
     fromOutline(items) {
+      // 首段只有「确实长得像日期」时才当成日期拆出来；
+      // 否则「访谈 20 位用户」会被拆成 date=访谈 / text=20 位用户。
+      const DATE_RE = /^(\d{4}-\d{1,2}(?:-\d{1,2})?|\d{4}年\d{1,2}月(?:\d{1,2}日)?|\d{1,2}月\d{1,2}日)\s+(.*)$/;
+      const d0 = new Date(), p2 = (x) => String(x).padStart(2, '0');
+      let cursor = `${d0.getFullYear()}-${p2(d0.getMonth() + 1)}-${p2(d0.getDate())}`;
       return {
         nodes: items.map((it) => {
-          const m = String(it.text).match(/^(\S+)\s+(.*)$/);
-          return { id: uid('n'), date: m ? m[1] : '', text: m ? m[2] : it.text, note: it.note || '' };
+          const m = String(it.text).match(DATE_RE);
+          // 没有日期的时间线没有意义，按每 3 天一件的顺序给个默认排期，改起来比空白方便
+          const date = m ? m[1] : cursor;
+          const end = addDays(date, 3);
+          cursor = dayDiff(cursor, end) > 0 ? end : cursor;
+          return { id: uid('n'), date, text: m ? m[2] : it.text, note: it.note || '' };
         }),
         links: [], meta: {},
       };
@@ -1536,14 +1548,32 @@
       return doc.nodes.map((n) => ({ level: 0, text: `${n.start || ''} → ${addDays(n.start || '', n.days || 1)}　${n.text}（${n.progress || 0}%）` }));
     },
     fromOutline(items) {
-      const nodes = [];
-      items.forEach((it) => {
-        const m = String(it.text).match(/(\d{4}-\d{2}-\d{2})/);
-        const p = String(it.text).match(/(\d+)%/);
-        const t = String(it.text).replace(/^\S+\s*→\s*\S+\s*/, '').replace(/（\d+%）/, '').trim();
-        nodes.push({ id: uid('n'), text: t || it.text, start: m ? m[1] : '', days: 3, progress: p ? +p[1] : 0, owner: '', note: '' });
+      // 大纲里通常没有日期（导图/流程图转过来时），此时按顺序自动排期：
+      // 每件事 3 天，前一件结束的第二天开始，形成一条能直接看的排期，而不是全部堆在第一天。
+      const DATE = /(\d{4}-\d{2}-\d{2})/;
+      const pct = /(\d+)\s*%/;
+      const today = (function () {
+        const d = new Date(), p = (x) => String(x).padStart(2, '0');
+        return `${d.getFullYear()}-${p(d.getMonth() + 1)}-${p(d.getDate())}`;
+      })();
+      let cursor = today;
+      const nodes = items.map((it) => {
+        const raw = String(it.text);
+        const dm = raw.match(DATE);
+        const pm = raw.match(pct);
+        const text = raw
+          .replace(/^\S+\s*→\s*\S+\s*/, '')
+          .replace(/（\d+\s*%）/, '')
+          .replace(DATE, '')
+          .trim();
+        const days = 3;
+        const start = dm ? dm[1] : cursor;
+        const end = addDays(start, days);
+        // 有明确日期时按它走，但游标只往前推，避免时间倒流
+        cursor = dayDiff(cursor, end) > 0 ? end : cursor;
+        return { id: uid('n'), text: text || raw, start, days, progress: pm ? +pm[1] : 0, owner: '', note: '' };
       });
-      return { nodes, links: [], meta: {} };
+      return { nodes, links: [], meta: { start: today } };
     },
     mermaid(doc) {
       const lines = ['gantt', '  dateFormat YYYY-MM-DD', '  title ' + esc(doc.title || '甘特图')];
